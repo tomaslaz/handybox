@@ -1,2 +1,2 @@
 # handybox
-Tools, scripts, hello world tests, etc.
+Note, tools, scripts, hello world tests, etc.
