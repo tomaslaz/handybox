@@ -1,0 +1,13 @@
+Bootstrap: docker
+From: nvcr.io/nvidia/cuda:9.0-devel-ubuntu16.04
+
+%post
+  apt-get update; apt-get -y install git
+  git clone https://github.com/tomaslaz/handybox.git
+
+#%environment
+#    export LC_ALL=C
+#    export PATH=/usr/games:$PATH
+
+#%runscript
+#    fortune | cowsay | lolcat
