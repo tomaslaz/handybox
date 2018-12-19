@@ -1,2 +1,2 @@
 #!/bin/bash
-cd 0_Simple/simpleMultiGPU; ./simpleMultiGPU
+cd /usr/local/handybox/0_Simple/simpleMultiGPU; ./simpleMultiGPU
