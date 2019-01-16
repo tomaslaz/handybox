@@ -1,28 +1,9 @@
+
+
+
 ## Installing singularity
 
-### Brew
-
-### Manualy
-
-```
-git clone https://github.com/singularityware/singularity.git
-cd singularity
-./autogen.sh
-./configure –prefix=/usr/local
-make
-sudo make install
-```
-
-or
-
-```
-sudo apt-get update && sudo apt-get install -y \
-    build-essential \
-    libssl-dev \
-    uuid-dev \
-    libgpgme11-dev \
-    squashfs-tools
-```
+https://www.sylabs.io/guides/3.0/user-guide/quick_start.html#quick-installation-steps
 
 
 ## Building a simple example
