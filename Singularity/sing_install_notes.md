@@ -1,6 +1,4 @@
 
-
-
 ## Installing singularity
 
 https://www.sylabs.io/guides/3.0/user-guide/quick_start.html#quick-installation-steps
