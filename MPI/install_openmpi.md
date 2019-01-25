@@ -1,3 +1,16 @@
+
+
+
+## Installing latest compilers (Ubuntu 18)
+
+```
+sudo apt-get install gcc-8 g++-8 gfortran-8
+
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 10
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 10
+sudo update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-8 10
+```
+
 It is necessary to add on the prefix the installation directory we want to use for OpenMPI.
 
 Configuring to use GCC-8 compilers (if multiple compilers are installed):
@@ -14,7 +27,7 @@ sudo make install
 Including the path to our path environment and the path and to the library environment variable
 
 ```
-export PATH="/usr/local/bin$PATH"
+export PATH="/usr/local/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/lib/:$LD_LIBRARY_PATH"
 ```
 
