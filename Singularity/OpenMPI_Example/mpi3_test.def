@@ -1,0 +1,43 @@
+# Container recipe
+
+BootStrap: docker
+From: ubuntu:16.04
+
+# Installing dependencies
+%post
+    apt-get update -y
+    apt-get install -y python build-essential git wget
+    apt-get install -y gcc g++ gfortran
+
+    apt-get update -y
+
+# OpenMPI
+%post
+    cd /
+    mkdir -p /var/tmp/ompi
+    cd /var/tmp/ompi
+    wget https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.3.tar.bz2
+    tar -xvf openmpi-3.1.3.tar.bz2
+    cd openmpi-3.1.3
+
+    ./configure --prefix=/usr/local
+    make -j$(nproc)
+    make -j$(nproc) install
+    cd /
+    rm -rf /var/tmp/ompi
+
+# Setting up environmental parameters
+%environment
+    export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+    export PATH=/usr/local/bin:$PATH
+%post
+    export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+    export PATH=/usr/local/bin:$PATH
+
+# Test scripts
+%post
+    cd /
+    wget -q -nc --no-check-certificate -P /var/tmp https://raw.githubusercontent.com/tomaslaz/handybox/master/MPI/Performance/point_to_point_mpi_send.c
+    mpicc -o /usr/local/bin/point_to_point_mpi_send /var/tmp/point_to_point_mpi_send.c
+    wget -q -nc --no-check-certificate -P /var/tmp https://raw.githubusercontent.com/open-mpi/ompi/master/examples/ring_c.c
+    mpicc -o /usr/local/bin/ring_c /var/tmp/ring_c.c
