@@ -1,0 +1,31 @@
+# Container recipe
+
+BootStrap: docker
+From: ubuntu:16.04
+
+# Installing dependencies
+%post
+    apt-get update -y
+    apt-get install -y python build-essential git wget
+    apt-get install -y gcc g++ gfortran
+    apt-get update -y
+
+# Test scripts
+%post
+    cd /opt
+    git clone https://github.com/LangdalP/EPCC-OpenMP-micro-benchmarks.git
+    cd EPCC-OpenMP-micro-benchmarks/
+    mv Makefile.defs Makefile.defs_backup
+    mv Makefile.defs.gcc Makefile.defs
+    make
+    cd
+
+# Setting up environmental parameters
+%environment
+    export OMP_NUM_THREADS=4
+%post
+    export OMP_NUM_THREADS=4
+
+# Execute
+%runscript
+    /opt/EPCC-OpenMP-micro-benchmarks/bin/taskbench
