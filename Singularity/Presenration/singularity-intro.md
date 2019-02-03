@@ -22,6 +22,7 @@
 
 ![Container](container.jpg)
 
+
 - are encapsulations of system environments (software, libraries, etc…)
 - allow portability of workflows between resources
 - are lightweight and introduce little overhead
@@ -39,6 +40,8 @@ With the addition of lightweight virtualization features to the Linux kernel (ar
 ---
 
 # Docker
+
+With a container image, we bundle the application along with its runtime and dependencies. We use that image to create an isolated executable environment, also known as container. We can deploy containers from a given image on the platform of our choice, such as desktops, VMs, cloud, etc.
 
 it’s just processes running in the same Linux kernel:
 
@@ -110,6 +113,11 @@ Shifter and CharlieCloud are designed to work with (but modify) Docker container
 
 ---
 # Singularity
+
+We started our work aiming to solve the problem of a lack of
+reproducible, portable environments for science.
+
+The goal of Singularity is to support existing and traditional HPC resources as easily as installing a single package onto the host operating system.
 
 - Mobility of compute
 
