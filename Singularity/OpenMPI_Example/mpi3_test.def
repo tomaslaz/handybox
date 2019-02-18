@@ -9,8 +9,6 @@ From: ubuntu:16.04
     apt-get install -y python build-essential git wget
     apt-get install -y gcc g++ gfortran
 
-    apt-get update -y
-
 # OpenMPI
 %post
     cd /

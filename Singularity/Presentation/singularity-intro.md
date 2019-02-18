@@ -1,3 +1,4 @@
+
 # Containers: Singularity
 
 ![Container](container.jpg)
@@ -5,8 +6,6 @@
 ---
 
 # Agenda
-
----
 
 1. What is a container
 2. Brief history of virtualisation
@@ -45,7 +44,7 @@ With a container image, we bundle the application along with its runtime and dep
 
 it’s just processes running in the same Linux kernel:
 
-namespaces (Mount, Process ID, Network, User ID): isolates processes from the rest of the system, without needing to use full low level virtualization technology.
+namespaces (Mount, Process ID, Network, User ID): isolates processes from the rest of the system, without needing to use full low level virtualisation technology.
 cgroups: resource limits
 seccomp-bpf: filters which system calls your processes can run
 
@@ -95,11 +94,11 @@ Modules and package managers make installation easy, however they are not portab
 
 # To sum up:
 
-- Virtual machines -> overheads
+- Virtual machines -> overhead
 
 - Docker -> security
 
-- Software modules, Package managers -> not portable environments
+- Software modules, package managers -> not portable environments
 
 ---
 
@@ -114,8 +113,7 @@ Shifter and CharlieCloud are designed to work with (but modify) Docker container
 ---
 # Singularity
 
-We started our work aiming to solve the problem of a lack of
-reproducible, portable environments for science.
+We started our work aiming to solve the problem of a lack of reproducible, portable environments for science.
 
 The goal of Singularity is to support existing and traditional HPC resources as easily as installing a single package onto the host operating system.
 
@@ -142,9 +140,11 @@ and Lustre, while at the same time integrating seamlessly with any resource mana
 ---
 # Singularity in action
 
+- Recipe file
+
 - Docker
 
-- Recipe file
+
 
 - Local / HPC
 
