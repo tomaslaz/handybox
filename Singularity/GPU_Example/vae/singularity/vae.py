@@ -191,8 +191,12 @@ flags.DEFINE_integer(
     default=110,
     help="Threshold for value of loss below which training stops before max_steps.")
 
-FLAGS = flags.FLAGS
+flags.DEFINE_integer(
+    "num_gpus",
+    default=0,
+    help="Number of gpus")
 
+FLAGS = flags.FLAGS
 
 def get_number_gpus():
     local_device_protos = device_lib.list_local_devices()
@@ -542,26 +546,21 @@ def main(argv):
     train_input_fn, eval_input_fn = build_input_fns(FLAGS.data_dir,
                                                     FLAGS.batch_size)
 
-    if tf.__version__.startswith("1."):
-        strategy = tf.contrib.distribute.CollectiveAllReduceStrategy()
-    else:
-        strategy = tf.distribute.CollectiveAllReduceStrategy()
+  if tf.__version__.startswith("1."):
+    strategy = tf.contrib.distribute.MirroredStrategy()
+  else:
+    strategy = tf.distribute.MirroredStrategy()
 
-    # if tf.__version__.startswith("1."):
-    #     strategy = tf.contrib.distribute.MirroredStrategy()
-    # else:
-    #     strategy = tf.distribute.MirroredStrategy()
-
-    estimator = tf.estimator.Estimator(
-        model_fn,
-        params=params,
-        config=tf.estimator.RunConfig(
-            model_dir=FLAGS.model_dir,
-            save_checkpoints_steps=FLAGS.viz_steps,
-            train_distribute=strategy,
-            eval_distribute=strategy
-        ),
-    )
+  estimator = tf.estimator.Estimator(
+    model_fn,
+    params=params,
+    config=tf.estimator.RunConfig(
+      model_dir=FLAGS.model_dir,
+      save_checkpoints_steps=FLAGS.viz_steps,
+      train_distribute=strategy,
+      eval_distribute=strategy
+    ),
+  )
 
   with tf.Session(config=tf.ConfigProto(inter_op_parallelism_threads=1,
                                         intra_op_parallelism_threads=1)) as sess:
